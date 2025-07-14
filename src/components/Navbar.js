@@ -1,37 +1,32 @@
-// Navbar.js
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-scroll";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleToggle = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <nav className="navbar">
-      <ul>
-        <li>
-          <Link to="home" smooth={true} duration={800}>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="about" smooth={true} duration={800}>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to="skills" smooth={true} duration={800}>
-            Skills
-          </Link>
-        </li>
-        <li>
-          <Link to="projects" smooth={true} duration={800}>
-            Projects
-          </Link>
-        </li>
-        <li>
-          <Link to="contact" smooth={true} duration={800}>
-            Contact
-          </Link>
-        </li>
+      <div
+        className={`hamburger ${menuOpen ? "open" : ""}`}
+        onClick={handleToggle}
+      >
+        <span />
+        <span />
+        <span />
+      </div>
+
+      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+        {["home", "about", "skills", "projects", "contact"].map((section) => (
+          <li key={section}>
+            <Link to={section} smooth={true} duration={800} onClick={closeMenu}>
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );

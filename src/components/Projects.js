@@ -1,69 +1,66 @@
 import React from "react";
 import "../styles/Projects.css";
-import proj1 from "../assets/project1.jpg";
-import proj2 from "../assets/project1.jpg"; // Replace with unique image if available
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
-function Projects() {
-  const projectData = [
-    {
-      title: "Portfolio Website",
-      image: proj1,
-      description:
-        "A personal portfolio to showcase my skills, projects, and resume.",
-      demoLink: "https://yourportfolio.com",
-      githubLink: "https://github.com/yourusername/portfolio",
-    },
-    {
-      title: "E-commerce App",
-      image: proj2,
-      description: "React + Firebase based e-commerce web app.",
-      demoLink: "https://yourecommerce.com",
-      githubLink: "https://github.com/yourusername/ecommerce-app",
-    },
-    // Add more projects as needed
-  ];
+const projects = [
+  {
+    title: "Fashion E-Commerce",
+    description:
+      "A Myntra-like frontend with filtering, cart, and responsive UI.",
+    image: "/images/ecommerce.png",
+    link: "https://your-ecommerce-site.com",
+  },
+  {
+    title: "Portfolio Website",
+    description: "An animated, scroll-based React portfolio with 3D avatar.",
+    image: "/images/portfolio.png",
+    link: "https://your-portfolio.com",
+  },
+  {
+    title: "AI Chatbot UI",
+    description: "Frontend of a chatbot using OpenAI API and React animations.",
+    image: "/images/chatbot.png",
+    link: "https://your-chatbot.com",
+  },
+];
+
+const Projects = () => {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
 
   return (
-    <section id="projects" className="projects-section">
-      <h2>My Projects</h2>
+    <section className="projects-section">
+      <h2 className="projects-title">My Projects</h2>
       <div className="projects-grid">
-        {projectData.map((project, index) => (
-          <div className="project-card" key={index}>
-            <img
-              src={project.image}
-              alt={project.title}
-              className="project-img"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  "https://via.placeholder.com/400x300?text=Project+Image";
-              }}
-            />
-            <div className="project-overlay">
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="buttons">
-                <a
-                  href={project.demoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Live Demo
-                </a>
-                <a
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              </div>
+        {projects.map((proj, index) => (
+          <div
+            className="project-card"
+            key={index}
+            data-aos="fade-up"
+            data-aos-delay={index * 60}
+            data-aos-duration="600"
+          >
+            <img src={proj.image} alt={proj.title} className="project-image" />
+            <div className="project-info">
+              <h3>{proj.title}</h3>
+              <p>{proj.description}</p>
+              <a
+                href={proj.link}
+                className="project-btn"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View Project
+              </a>
             </div>
           </div>
         ))}
       </div>
     </section>
   );
-}
+};
 
 export default Projects;

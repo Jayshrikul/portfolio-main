@@ -1,39 +1,71 @@
-import React from "react";
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 import "../styles/Contact.css";
 
 
 const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_yemu9zh",
+        "service_yemu9zh",
+        form.current,
+        "WRUdpAcKWELugynvw"
+      )
+      .then(
+        () => {
+          toast.success("Message sent successfully! 🎉", {
+            position: "top-right",
+          });
+          form.current.reset();
+        },
+        (error) => {
+          toast.error("Failed to send message 😢", {
+            position: "top-right",
+          });
+          console.error(error);
+        }
+      );
+  };
+
   return (
     <section className="contact-section" id="contact">
-      <h2>Contact Me</h2>
+      <h2 className="contact-title">Contact Me</h2>
 
-      <form className="contact-form">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit">Send Message</button>
+      <form ref={form} onSubmit={sendEmail} className="contact-form">
+        <input type="text" name="from_name" placeholder="Your Name" required />
+        <input type="email" name="reply_to" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required />
+        <button type="submit">Send</button>
       </form>
-
-      <p>Or connect with me on</p>
-      <div className="social-icons">
+      <div className="contact-socials">
         <a
-          href="https://linkedin.com/in/jayshri-kulkarni-0602b0217"
+          href="https://www.linkedin.com/in/jayshri-kulkarni-0602b0217"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-linkedin"></i>
+          <FaLinkedin />
         </a>
         <a
-          href="https://github.com/your-profile"
+          href="https://github.com/Jayshrikul"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-github"></i>
+          <FaGithub />
         </a>
-        <a href="jayshrirkulkarni11@email.com">
-          <i className="fas fa-envelope"></i>
+        <a href="jayshrikulkarni51@gmail.com">
+          <FaEnvelope />
         </a>
       </div>
+
+      <ToastContainer />
     </section>
   );
 };

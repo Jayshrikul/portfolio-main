@@ -1,27 +1,18 @@
-import React, { useRef, Suspense, useEffect } from "react";
+import React, { useRef, Suspense, } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { AnimationMixer } from "three";
-import "../styles/Avatar.css"; // 📁 make sure to create this file
+import "../styles/Avatar.css";
 
 function AvatarModel({ modelPath }) {
   const group = useRef();
-  const { scene, animations } = useGLTF(modelPath);
-  const mixer = useRef();
+  const { scene } = useGLTF(modelPath);
 
-  useEffect(() => {
-    if (animations.length) {
-      mixer.current = new AnimationMixer(scene);
-      const action = mixer.current.clipAction(animations[0]);
-      action.play();
-    }
-  }, [animations, scene]);
-
-  useFrame((state, delta) => {
-    mixer.current?.update(delta);
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    group.current.position.y = -1.2 + Math.sin(t * 1.5) * 0.05; // gently float up and down
   });
 
-  return <primitive ref={group} object={scene} scale={2} position-y={-1.2} />;
+  return <primitive ref={group} object={scene} scale={2} />;
 }
 
 export default function Avatar() {
@@ -35,7 +26,11 @@ export default function Avatar() {
         >
           <AvatarModel modelPath="/assets/avatar.glb" />
         </Suspense>
-        <OrbitControls enableZoom={false} enablePan={false} />
+        <OrbitControls
+          enableZoom={false}
+          enableRotate={false}
+          enablePan={false}
+        />
       </Canvas>
     </div>
   );

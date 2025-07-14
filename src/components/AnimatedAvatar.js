@@ -38,7 +38,7 @@ export default function AnimatedAvatar() {
         <Suspense fallback={null}>
           <AvatarGLB />
         </Suspense>
-        <OrbitControls enableZoom={true} enablePan={true} />
+        <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
     </div>
   );

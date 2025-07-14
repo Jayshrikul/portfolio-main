@@ -30,7 +30,7 @@ function App() {
       </button>
 
       {/* Hero Section */}
-      <section id="hero" className="intro-section">
+      <section id="home" className="intro-section">
         <motion.div
           className="intro-content"
           initial={{ opacity: 0, y: 30 }}

@@ -1,20 +1,51 @@
-// src/components/Skills.js
-import React from "react";
-import "../styles/Skills.css"; // create this file if needed
+import React, { useEffect } from "react";
+import "../styles/Skills.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-function Skills() {
+const skills = [
+  "HTML5",
+  "CSS",
+  "JavaScript",
+  "React.js",
+  "Redux",
+  "Responsive Design",
+  "UI/UX",
+  "Git",
+  "GitHub",
+  "Artificial Intelligence",
+];
+
+const Skills = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      
+    });
+   
+  }, []);
+
   return (
-    <section id="skills" className="skills-section">
-      <h2>Skills</h2>
-      <ul>
-        <li>HTML5, CSS3, JavaScript</li>
-        <li>React.js, Redux</li>
-        <li>Artificial Intelligence</li>
-        <li>Responsive Design, UI/UX</li>
-        <li>Git, GitHub</li>
-      </ul>
+    <section className="skills-container">
+      <h2 className="skills-title">Skills</h2>
+      <div className="skills-pill-wrapper">
+        {skills.map((skill, index) => (
+        
+          <span
+          key={index}
+          className="skill-pill"
+          data-aos="zoom-in"
+          data-aos-delay={index * 50}
+          data-aos-duration="500"
+          data-aos-easing="ease-out-cubic"
+        >
+          {skill}
+        </span>
+        ))}
+      </div>
     </section>
   );
-}
+};
 
 export default Skills;
