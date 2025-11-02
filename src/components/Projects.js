@@ -3,28 +3,31 @@ import "../styles/Projects.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import ecommerceImg from "../assets/Ecommerce.jpg";
+import portfolioImg from "../assets/Portfolio.jpg";
+import ChatbotaiImg from "../assets/Chatbotai.jpg";
 
 const projects = [
   {
     title: "Fashion E-Commerce",
-    description:
-      "A Myntra-like frontend with filtering, cart, and responsive UI.",
-    image: "/images/ecommerce.png",
-    link: "https://your-ecommerce-site.com",
+    description: "A ecommerce frontend with filtering, cart, wishlist and responsive UI.",
+    image: ecommerceImg,
+    link: "https://ecommerce-web-app-iota.vercel.app/",
   },
   {
     title: "Portfolio Website",
     description: "An animated, scroll-based React portfolio with 3D avatar.",
-    image: "/images/portfolio.png",
-    link: "https://your-portfolio.com",
+    image: portfolioImg,
+    link: "https://portfolio-main-sepia-iota.vercel.app/",
   },
   {
-    title: "AI Chatbot UI",
+    title: "AI Chatbot",
     description: "Frontend of a chatbot using OpenAI API and React animations.",
-    image: "/images/chatbot.png",
-    link: "https://your-chatbot.com",
+    image: ChatbotaiImg,
+    link: "https://ai-chatbot-kohl-pi-33.vercel.app/",
   },
 ];
+
 
 const Projects = () => {
   useEffect(() => {
